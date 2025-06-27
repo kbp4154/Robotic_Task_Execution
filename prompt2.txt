@@ -1,0 +1,144 @@
+Example of task tree generation of cooking meals were :-
+[
+    {
+       "input_nodes":[
+          {
+             "label":"skillet",
+             "states":[
+                "empty"
+             ],
+             "ingredients":[
+                
+             ],
+             "container":"stove"
+          },
+          {
+             "label":"stove",
+             "states":[
+                "off"
+             ],
+             "ingredients":[
+                
+             ],
+             "container":"None"
+          }
+       ],
+       "motion_node":"heat",
+       "output_nodes":[
+          {
+             "label":"skillet",
+             "states":[
+                "empty"
+             ],
+             "ingredients":[
+                
+             ],
+             "container":"stove"
+          },
+          {
+             "label":"stove",
+             "states":[
+                "on"
+             ],
+             "ingredients":[
+                
+             ],
+             "container":"None"
+          }
+       ]
+    },
+    {
+       "input_nodes":[
+          {
+             "label":"bowl",
+             "states":[
+                "not_empty"
+             ],
+             "ingredients":[
+                "butter"
+             ],
+             "container":"None"
+          },
+          {
+             "label":"skillet",
+             "states":[
+                "empty"
+             ],
+             "ingredients":[
+                
+             ],
+             "container":"stove"
+          }
+       ],
+       "motion_node":"pour",
+       "output_nodes":[
+          {
+             "label":"bowl",
+             "states":[
+                "empty"
+             ],
+             "ingredients":[
+                
+             ],
+             "container":"None"
+          },
+          {
+             "label":"skillet",
+             "states":[
+                "not_empty"
+             ],
+             "ingredients":[
+                "butter"
+             ],
+             "container":"stove"
+          }
+       ]
+    },
+    {
+       "input_nodes":[
+          {
+             "label":"skillet",
+             "states":[
+                "not_empty"
+             ],
+             "ingredients":[
+                "butter"
+             ],
+             "container":"stove"
+          }
+       ],
+       "motion_node":"heat",
+       "output_nodes":[
+          {
+             "label":"skillet",
+             "states":[
+                "not_empty"
+             ],
+             "ingredients":[
+                "melted_butter"
+             ],
+             "container":"stove"
+          }
+       ]
+    }
+ ]
+Generate a task tree in JSON format for the dish {dish}, outlining the ingredients {ingredients}, along with 
+input nodes(label(string), state(list), ingredients(list), container(string)), motion node(it is a string), output node(its format is same as input node)
+generate single task trees for each dish and give me only list of json task trees with no additional texts or brackets
+
+states(list) which can be used in this task trees were:-
+creamy_paste
+diced
+floured
+grated
+juiced
+jullienne
+mixed
+other
+peeled
+sliced
+whole
+empty
+non_empty
+on
+off

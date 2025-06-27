@@ -1,0 +1,28 @@
+Generate a task tree in JSON format for the dish {dish}, outlining the ingredients {ingredients}, along with 
+input nodes(label(string), state(list), ingredients(list), container(string)), motion node(it is a string), output node(its format is same as input node)
+sample of task tree generation of cooking meals:
+[
+   {
+      "input_nodes":[
+         {
+            "label": ... ,
+            "states":[],
+            "ingredients":[],
+            "container": ..
+         },
+         ...
+      ],
+      "motion_node":"",
+      "output_nodes":[
+         {
+            "label": ... ,
+            "states":[],
+            "ingredients":[],
+            "container": ..
+         },
+         ...
+      ]
+   }
+]
+generate single task trees for each dish and give me only list of json task trees with no additional texts or brackets
+states can  be empty if they are not relevant to the task. Ingredients is an array of strings representing the names of the ingredients required by this

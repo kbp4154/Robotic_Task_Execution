@@ -1,0 +1,365 @@
+Generate a task tree in JSON format for the dish {dish}, outlining the ingredients {ingredients}, along with 
+input nodes:-
+    label (string),
+    state (list)
+        The state of each individual one categoriezed into following states:-
+            Ingredient states:-
+                Whole, Sliced, Chopped, Diced, Minced, Peeled, Grated, Marinated, creamy_paste, floured, juiced, mixed
+            Utensils States:-
+                Clean, Dirty, Occupied, Empty
+            Cooking Process states:-
+                Heating, Cooking, Cooling, Finished
+            General States:-
+                Raw, Cooked, Seasoned, Mixed, Seperated
+            Object states:-
+                on,off
+    ingredients (list),
+    container(string)
+motion node(motion node is a string ),
+output node(its format is same as input node)
+
+Examples of task tree generation of cooking meals were:- 
+Example 1: Making Pasta with Tomato Sauce:-
+[
+    {
+      "input_nodes": [
+        {
+          "label": "pot",
+          "state": ["clean"],
+          "ingredients": [],
+          "container": "stove"
+        },
+        {
+          "label": "stove",
+          "state": ["off"],
+          "ingredients": [],
+          "container": "None"
+        }
+      ],
+      "motion_node": "heat",
+      "output_nodes": [
+        {
+          "label": "pot",
+          "state": ["clean"],
+          "ingredients": [],
+          "container": "stove"
+        },
+        {
+          "label": "stove",
+          "state": ["on"],
+          "ingredients": [],
+          "container": "None"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "water",
+          "state": ["empty"],
+          "ingredients": [],
+          "container": "pot"
+        },
+        {
+          "label": "pot",
+          "state": ["clean"],
+          "ingredients": [],
+          "container": "stove"
+        }
+      ],
+      "motion_node": "boil",
+      "output_nodes": [
+        {
+          "label": "water",
+          "state": ["boiling"],
+          "ingredients": [],
+          "container": "pot"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "pasta",
+          "state": ["raw"],
+          "ingredients": ["Pasta"],
+          "container": "pot"
+        },
+        {
+          "label": "water",
+          "state": ["boiling"],
+          "ingredients": [],
+          "container": "pot"
+        }
+      ],
+      "motion_node": "cook",
+      "output_nodes": [
+        {
+          "label": "pasta",
+          "state": ["cooked"],
+          "ingredients": ["Cooked Pasta"],
+          "container": "pot"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "saucepan",
+          "state": ["empty"],
+          "ingredients": [],
+          "container": "stove"
+        },
+        {
+          "label": "stove",
+          "state": ["on"],
+          "ingredients": [],
+          "container": "None"
+        }
+      ],
+      "motion_node": "heat",
+      "output_nodes": [
+        {
+          "label": "saucepan",
+          "state": ["empty"],
+          "ingredients": [],
+          "container": "stove"
+        },
+        {
+          "label": "stove",
+          "state": ["on"],
+          "ingredients": [],
+          "container": "None"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "olive_oil",
+          "state": ["raw"],
+          "ingredients": ["Olive Oil"],
+          "container": "saucepan"
+        },
+        {
+          "label": "garlic",
+          "state": ["whole"],
+          "ingredients": ["Garlic"],
+          "container": "saucepan"
+        },
+        {
+          "label": "onion",
+          "state": ["chopped"],
+          "ingredients": ["Onion"],
+          "container": "saucepan"
+        },
+        {
+          "label": "stove",
+          "state": ["on"],
+          "ingredients": [],
+          "container": "None"
+        }
+      ],
+      "motion_node": "saute",
+      "output_nodes": [
+        {
+          "label": "olive_oil",
+          "state": ["cooked"],
+          "ingredients": ["Olive Oil"],
+          "container": "saucepan"
+        },
+        {
+          "label": "garlic",
+          "state": ["cooked"],
+          "ingredients": ["Garlic"],
+          "container": "saucepan"
+        },
+        {
+          "label": "onion",
+          "state": ["cooked"],
+          "ingredients": ["Onion"],
+          "container": "saucepan"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "tomato_sauce",
+          "state": ["raw"],
+          "ingredients": ["Tomato Sauce"],
+          "container": "saucepan"
+        },
+        {
+          "label": "saucepan",
+          "state": ["on"],
+          "ingredients": [],
+          "container": "stove"
+        }
+      ],
+      "motion_node": "simmer",
+      "output_nodes": [
+        {
+          "label": "tomato_sauce",
+          "state": ["cooked"],
+          "ingredients": ["Tomato Sauce"],
+          "container": "saucepan"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "pasta",
+          "state": ["cooked"],
+          "ingredients": ["Cooked Pasta"],
+          "container": "pot"
+        },
+        {
+          "label": "tomato_sauce",
+          "state": ["cooked"],
+          "ingredients": ["Tomato Sauce"],
+          "container": "saucepan"
+        }
+      ],
+      "motion_node": "mix",
+      "output_nodes": [
+        {
+          "label": "pasta",
+          "state": ["mixed"],
+          "ingredients": ["Pasta with Tomato Sauce"],
+          "container": "pot"
+        }
+      ]
+    }
+]
+
+
+Example 2: Grilled Chicken Salad:-
+[
+    {
+      "input_nodes": [
+        {
+          "label": "grill",
+          "state": ["off"],
+          "ingredients": [],
+          "container": "None"
+        },
+        {
+          "label": "chicken_breast",
+          "state": ["raw"],
+          "ingredients": ["Chicken Breast"],
+          "container": "grill"
+        }
+      ],
+      "motion_node": "preheat",
+      "output_nodes": [
+        {
+          "label": "grill",
+          "state": ["on"],
+          "ingredients": [],
+          "container": "None"
+        },
+        {
+          "label": "chicken_breast",
+          "state": ["raw"],
+          "ingredients": ["Chicken Breast"],
+          "container": "grill"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "chicken_breast",
+          "state": ["raw"],
+          "ingredients": ["Chicken Breast"],
+          "container": "grill"
+        },
+        {
+          "label": "grill",
+          "state": ["on"],
+          "ingredients": [],
+          "container": "None"
+        }
+      ],
+      "motion_node": "grill",
+      "output_nodes": [
+        {
+          "label": "chicken_breast",
+          "state": ["cooked"],
+          "ingredients": ["Grilled Chicken Breast"],
+          "container": "grill"
+        }
+      ]
+    },
+    {
+      "input_nodes": [
+        {
+          "label": "lettuce",
+          "state": ["raw"],
+          "ingredients": ["Lettuce"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "tomato",
+          "state": ["sliced"],
+          "ingredients": ["Tomato"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "cucumber",
+          "state": ["sliced"],
+          "ingredients": ["Cucumber"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "red_onion",
+          "state": ["sliced"],
+          "ingredients": ["Red Onion"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "olive_oil",
+          "state": ["raw"],
+          "ingredients": ["Olive Oil"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "lemon_juice",
+          "state": ["raw"],
+          "ingredients": ["Lemon Juice"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "salt",
+          "state": ["raw"],
+          "ingredients": ["Salt"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "pepper",
+          "state": ["raw"],
+          "ingredients": ["Pepper"],
+          "container": "salad_bowl"
+        }
+      ],
+      "motion_node": "assemble",
+      "output_nodes": [
+        {
+          "label": "grilled_chicken",
+          "state": ["cooked"],
+          "ingredients": ["Grilled Chicken Breast"],
+          "container": "salad_bowl"
+        },
+        {
+          "label": "lettuce",
+          "state": ["mixed"],
+          "ingredients": ["Salad with Grilled Chicken"],
+          "container": "salad_bowl"
+        }
+      ]
+    }
+]
+
+Generate single task trees for each dish and give me only list of json task trees with no additional texts or brackets
